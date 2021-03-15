@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const path = require('path');
 const express = require('express');
 const products = require('./apiHelpers/productAPI.js');
@@ -5,8 +6,8 @@ const reviews = require('./apiHelpers/reviewAPI.js');
 const questions = require('./apiHelpers/qandaAPI.js');
 const cart = require('./apiHelpers/cartAPI.js');
 const outfit = require('./apiHelpers/outfitAPI.js');
-const reviewCache = require('./apiHelpers/reviewCache.js');
-const storeCache = require('./apiHelpers/reviewCache.js');
+// const reviewCache = require('./apiHelpers/reviewCache.js');
+// const storeCache = require('./apiHelpers/reviewCache.js');
 
 const app = express();
 const port = 3000;
@@ -48,13 +49,10 @@ app.get('/reviews', (req, res) => {
 });
 
 app.post('/reviews', (req, res) => {
-  console.log('post body', req.body);
   reviews.postReviews(req.body, (err, data) => {
     if (err) {
-      console.log('post err', err);
       res.status(404).send(err);
     } else {
-      console.log('post data', data);
       res.status(200).send(data);
     }
   });
@@ -63,7 +61,6 @@ app.post('/reviews', (req, res) => {
 app.put('/reviews', (req, res) => {
   reviews.putReviews(req.body, (err, data) => {
     if (err) {
-      console.log('put err', err);
       res.status(404).send(err);
     } else {
       res.status(200).send(data);
@@ -84,7 +81,6 @@ app.get('/qa/questions', (req, res) => {
 app.post('/qa/questions', (req, res) => {
   questions.postQuestions(req.body, (err, data) => {
     if (err) {
-      console.log(req.body);
       res.status(404).send(err);
     } else {
       res.status(201).send(data);
